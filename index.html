@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>도뤵아 생일축하해</title>
+<title>도훈아 생일축하해</title>
 
 <style>
 * {
@@ -53,10 +53,9 @@ body {
 .start-monster {
     width: 145px;
     height: 145px;
-    object-fit: contain;
+    object-fit: cover;
     margin: 0 auto 26px;
     display: block;
-    image-rendering: pixelated;
     border-radius: 24px;
     box-shadow: 0 8px 0 rgba(0,0,0,.18);
 }
@@ -98,7 +97,7 @@ body {
 .map {
     position: absolute;
     inset: 0;
-    background-image: url("map.png?v=final2");
+    background-image: url("map.png?v=prs1");
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
@@ -119,7 +118,7 @@ body {
     line-height: 1.45;
 }
 
-/* 맵 위 주인공 */
+/* 맵 위 하랑 */
 
 .player {
     position: absolute;
@@ -134,9 +133,8 @@ body {
 .player img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    image-rendering: pixelated;
-    border-radius: 10px;
+    object-fit: cover;
+    border-radius: 12px;
     filter: drop-shadow(0 4px 0 rgba(0,0,0,.25));
 }
 
@@ -293,12 +291,12 @@ body {
     background: #3abf4a;
 }
 
-/* 상대 나몰빼미 */
+/* 야생 PRS */
 
 .enemy-platform {
     position: absolute;
     right: 24px;
-    top: 150px;
+    top: 170px;
     width: 170px;
     height: 58px;
     background: #d8b07b;
@@ -309,17 +307,16 @@ body {
 
 .enemy-monster {
     position: absolute;
-    right: 52px;
-    top: 55px;
-    width: 135px;
-    height: 135px;
+    right: 36px;
+    top: 48px;
+    width: 165px;
+    height: 180px;
     object-fit: contain;
     z-index: 3;
-    image-rendering: pixelated;
     filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
 }
 
-/* 내 포켓몬 하뤵 */
+/* 내 포켓몬 하랑 */
 
 .player-platform {
     position: absolute;
@@ -345,8 +342,8 @@ body {
 .player-monster {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    image-rendering: pixelated;
+    object-fit: cover;
+    border-radius: 18px;
     filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
 }
 
@@ -381,7 +378,6 @@ body {
     opacity: 0;
     pointer-events: none;
     object-fit: contain;
-    image-rendering: pixelated;
 }
 
 .pokeball.throw {
@@ -532,11 +528,11 @@ body {
     width: 120px;
     height: 120px;
     object-fit: contain;
-    image-rendering: pixelated;
 }
 
 .ending-dog {
     border-radius: 24px;
+    object-fit: cover !important;
 }
 </style>
 </head>
@@ -548,18 +544,18 @@ body {
     <!-- 시작 화면 -->
     <section id="startScreen">
         <div class="start-title">
-            도뤵이의<br>
+            도훈이의<br>
             숲속 생일 RPG
         </div>
 
         <img
-            src="harueng_new.png?v=final2"
+            src="harang.png?v=prs1"
             class="start-monster"
-            alt="하뤵"
+            alt="하랑"
         >
 
         <div class="start-text">
-            하뤵과 함께 마을을 지나<br>
+            하랑과 함께 마을을 지나<br>
             숲속으로 들어가보자.
         </div>
 
@@ -576,11 +572,11 @@ body {
 
             <div class="top-ui">
                 방향키를 눌러 위쪽 숲 입구로 올라가세요.<br>
-                동굴 앞까지 가면 야생 포켓몬이 나타납니다.
+                동굴 앞까지 가면 야생 PRS가 나타납니다.
             </div>
 
             <div class="player" id="player">
-                <img src="harueng_new.png?v=final2" alt="하뤵">
+                <img src="harang.png?v=prs1" alt="하랑">
             </div>
 
         </div>
@@ -607,7 +603,7 @@ body {
 
             <div class="enemy-status">
                 <div class="status-name">
-                    <span>나몰빼미</span>
+                    <span>야생 PRS</span>
                     <span>Lv.24</span>
                 </div>
 
@@ -619,24 +615,24 @@ body {
             <div class="enemy-platform"></div>
 
             <img
-                src="namol.png?v=final2"
+                src="prs.png?v=prs1"
                 class="enemy-monster"
-                alt="야생 나몰빼미"
+                alt="야생 PRS"
             >
 
             <div class="player-platform"></div>
 
             <div class="player-monster-wrap">
                 <img
-                    src="harueng_new.png?v=final2"
+                    src="harang.png?v=prs1"
                     class="player-monster"
-                    alt="하뤵"
+                    alt="하랑"
                 >
             </div>
 
             <div class="player-status">
                 <div class="status-name">
-                    <span>하뤵</span>
+                    <span>하랑</span>
                     <span>Lv.24</span>
                 </div>
 
@@ -650,7 +646,7 @@ body {
             </div>
 
             <img
-                src="ball.png?v=final2"
+                src="ball.png?v=prs1"
                 id="pokeball"
                 class="pokeball"
                 alt="몬스터볼"
@@ -661,8 +657,8 @@ body {
         <div class="battle-bottom">
 
             <div class="battle-message" id="battleText">
-                야생 나몰빼미가 나타났다!<br>
-                하뤵은 가만히 바라보고 있다.
+                야생 PRS가 나타났다!<br>
+                하랑은 가만히 바라보고 있다.
             </div>
 
             <div class="command-area">
@@ -686,18 +682,18 @@ body {
             </div>
 
             <div class="ending-title">
-                도뤵아<br>
+                도훈아<br>
                 생일축하해
             </div>
 
             <div class="ending-sub">
-                야생 나몰빼미를 잡았다!<br>
-                하뤵과 함께 생일 퀘스트 완료.
+                야생 PRS를 잡았다!<br>
+                하랑과 함께 생일 퀘스트 완료.
             </div>
 
             <div class="ending-imgs">
-                <img src="namol.png?v=final2" alt="나몰빼미">
-                <img src="harueng_new.png?v=final2" class="ending-dog" alt="하뤵">
+                <img src="prs.png?v=prs1" alt="PRS">
+                <img src="harang.png?v=prs1" class="ending-dog" alt="하랑">
             </div>
 
         </div>
@@ -818,7 +814,7 @@ catchButton.addEventListener("click", function() {
 
     const battleText = document.getElementById("battleText");
 
-    battleText.innerHTML = "하뤵이 몬스터볼을 던졌다!";
+    battleText.innerHTML = "하랑이 몬스터볼을 던졌다!";
 
     pokeball.classList.remove("throw");
     enemyMonster.classList.remove("hit");
@@ -829,11 +825,11 @@ catchButton.addEventListener("click", function() {
 
     setTimeout(function() {
         enemyMonster.classList.add("hit");
-        battleText.innerHTML = "나몰빼미를 잡는 중이다...";
+        battleText.innerHTML = "야생 PRS를 잡는 중이다...";
     }, 950);
 
     setTimeout(function() {
-        battleText.innerHTML = "신난다! 나몰빼미를 잡았다!";
+        battleText.innerHTML = "신난다! 야생 PRS를 잡았다!";
     }, 1550);
 
     setTimeout(function() {
