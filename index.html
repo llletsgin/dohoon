@@ -321,101 +321,211 @@ body {
 
 /* 배틀 화면 */
 
+/* 배틀 화면 - 포켓몬 RPG 스타일 */
+
 #battleScreen {
     display: none;
     min-height: 100vh;
-    background:
-        linear-gradient(#9be7ff 0%, #e7fff2 43%, #79d66b 44%, #79d66b 100%);
+    background: #222;
     position: relative;
     overflow: hidden;
-    padding: 24px;
+    padding: 0;
 }
 
-.battle-box {
+.battle-stage {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    background:
+        linear-gradient(
+            to bottom,
+            #d97745 0%,
+            #e79656 35%,
+            #f3c37c 36%,
+            #f3c37c 100%
+        );
+    border-bottom: 4px solid #222;
+    overflow: hidden;
+}
+
+.battle-stage::before {
+    content: "";
     position: absolute;
-    left: 18px;
-    right: 18px;
-    bottom: 22px;
-    background: white;
-    border: 4px solid #333;
-    border-radius: 18px;
-    padding: 18px;
-    font-size: 18px;
-    font-weight: 900;
-    line-height: 1.55;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,.18) 0px,
+            rgba(255,255,255,.18) 3px,
+            transparent 3px,
+            transparent 9px
+        );
+    opacity: .25;
 }
 
-.wild-area {
+
+/* 상대 포켓몬 자리 */
+
+.enemy-platform {
     position: absolute;
-    top: 80px;
-    right: 18px;
-    width: 190px;
-    text-align: center;
+    right: 24px;
+    top: 110px;
+    width: 170px;
+    height: 58px;
+    background: #d8b07b;
+    border-radius: 50%;
+    border: 4px solid #8f6a45;
 }
 
-.partner-area {
+.enemy-monster {
     position: absolute;
-    bottom: 205px;
-    left: 18px;
-    width: 190px;
-    text-align: center;
-}
-
-.name-tag {
-    display: inline-block;
-    background: white;
-    border: 3px solid #333;
-    border-radius: 999px;
-    padding: 6px 12px;
-    font-size: 15px;
-    font-weight: 900;
-    margin-bottom: 8px;
-}
-
-.wild-img {
-    width: 155px;
-    height: 155px;
+    right: 52px;
+    top: 20px;
+    width: 135px;
+    height: 135px;
     object-fit: contain;
+    z-index: 2;
     filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
 }
 
-.partner-img-wrap {
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 4px solid #333;
-    background: #fff;
+.enemy-status {
+    position: absolute;
+    left: 12px;
+    top: 28px;
+    width: 190px;
+    background: #f8f8f8;
+    border: 4px solid #222;
+    border-radius: 8px 8px 8px 2px;
+    padding: 8px 10px;
+    z-index: 3;
 }
 
-.partner-img {
-    width: 240px;
-    height: 160px;
+.status-name {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.hp-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border: 2px solid #222;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.hp-fill {
+    height: 100%;
+    width: 100%;
+    background: #3abf4a;
+}
+
+
+/* 내 포켓몬 자리 */
+
+.player-platform {
+    position: absolute;
+    left: 24px;
+    bottom: 95px;
+    width: 190px;
+    height: 62px;
+    background: #d8b07b;
+    border-radius: 50%;
+    border: 4px solid #8f6a45;
+}
+
+.player-monster-wrap {
+    position: absolute;
+    left: 28px;
+    bottom: 118px;
+    width: 150px;
+    height: 130px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.player-monster {
+    width: 230px;
+    height: 150px;
     object-fit: cover;
     object-position: 85% center;
     transform: translateX(-82px);
+    filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
+}
+
+.player-status {
+    position: absolute;
+    right: 12px;
+    bottom: 112px;
+    width: 190px;
+    background: #f8f8f8;
+    border: 4px solid #222;
+    border-radius: 8px 8px 2px 8px;
+    padding: 8px 10px;
+    z-index: 3;
+}
+
+.hp-number {
+    margin-top: 4px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+
+/* 하단 텍스트 / 선택창 */
+
+.battle-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 210px;
+    background: #f1f1f1;
+    border-top: 5px solid #222;
+    display: flex;
+    flex-direction: column;
+}
+
+.battle-message {
+    margin: 12px;
+    padding: 16px;
+    min-height: 92px;
+    background: white;
+    border: 4px solid #222;
+    border-radius: 8px;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.6;
+}
+
+.command-area {
+    margin: 0 12px 12px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
 .catch-button {
     width: 100%;
-    margin-top: 14px;
-    border: 0;
-    border-radius: 14px;
-    background: #e03131;
-    color: white;
+    height: 58px;
+    border: 4px solid #222;
+    border-radius: 8px;
+    background: #fff;
+    color: #111;
     font-size: 22px;
     font-weight: 900;
-    padding: 14px;
-    box-shadow: 0 5px 0 #9f1f1f;
+    cursor: pointer;
+    box-shadow: inset -4px -4px 0 rgba(0,0,0,.12);
 }
 
 .catch-button:active {
-    transform: translateY(4px);
-    box-shadow: 0 1px 0 #9f1f1f;
+    transform: translateY(2px);
+    background: #ffe066;
 }
-
-
 /* 마지막 화면 */
 
 #endingScreen {
