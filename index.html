@@ -31,7 +31,6 @@ body {
     overflow: hidden;
 }
 
-
 /* 시작 화면 */
 
 #startScreen {
@@ -55,8 +54,19 @@ body {
 .start-text {
     font-size: 18px;
     line-height: 1.7;
-    margin-bottom: 34px;
+    margin-bottom: 28px;
     color: #444;
+}
+
+.start-monster {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 24px;
+    margin: 0 auto 26px;
+    display: block;
+    image-rendering: pixelated;
+    box-shadow: 0 8px 0 rgba(0,0,0,.18);
 }
 
 .main-button {
@@ -75,7 +85,6 @@ body {
     transform: translateY(4px);
     box-shadow: 0 1px 0 #1f6f30;
 }
-
 
 /* 맵 화면 */
 
@@ -96,7 +105,6 @@ body {
     background-repeat: no-repeat;
 }
 
-
 /* 안내문 */
 
 .top-ui {
@@ -114,32 +122,25 @@ body {
     line-height: 1.45;
 }
 
-
-/* 플레이어 */
+/* 맵 위 주인공 */
 
 .player {
     position: absolute;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: #ffd166;
-    border: 3px solid #222;
-    z-index: 7;
+    width: 54px;
+    height: 54px;
     left: 205px;
     top: 700px;
+    z-index: 7;
     transition: left .18s linear, top .18s linear;
-    box-shadow: 0 3px 0 rgba(0,0,0,.25);
 }
 
-.player::before {
-    content: "윤";
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 19px;
-    font-weight: 900;
+.player img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,.25));
 }
 
 .player.walk {
@@ -154,7 +155,6 @@ body {
         transform: translateY(-4px);
     }
 }
-
 
 /* 방향키 */
 
@@ -216,7 +216,6 @@ body {
     line-height: 1.45;
 }
 
-
 /* 배틀 화면 */
 
 #battleScreen {
@@ -227,9 +226,6 @@ body {
     overflow: hidden;
     padding: 0;
 }
-
-
-/* 배틀 상단 */
 
 .battle-stage {
     position: relative;
@@ -262,7 +258,6 @@ body {
         );
     opacity: .25;
 }
-
 
 /* 상대 상태창 */
 
@@ -301,8 +296,7 @@ body {
     background: #3abf4a;
 }
 
-
-/* 상대 포켓몬 */
+/* 상대 나몰빼미 */
 
 .enemy-platform {
     position: absolute;
@@ -324,11 +318,11 @@ body {
     height: 135px;
     object-fit: contain;
     z-index: 3;
+    image-rendering: pixelated;
     filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
 }
 
-
-/* 내 포켓몬 */
+/* 내 포켓몬 하뤵 */
 
 .player-platform {
     position: absolute;
@@ -344,20 +338,18 @@ body {
 
 .player-monster-wrap {
     position: absolute;
-    left: 28px;
-    bottom: 130px;
+    left: 25px;
+    bottom: 125px;
     width: 150px;
-    height: 130px;
-    overflow: hidden;
+    height: 150px;
     z-index: 3;
 }
 
 .player-monster {
-    width: 230px;
-    height: 150px;
-    object-fit: cover;
-    object-position: 85% center;
-    transform: translateX(-82px);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
     filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
 }
 
@@ -380,6 +372,72 @@ body {
     font-weight: 900;
 }
 
+/* 몬스터볼 */
+
+.pokeball {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    left: 115px;
+    bottom: 165px;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
+.pokeball.throw {
+    opacity: 1;
+    animation: throwBall 1s ease-in-out forwards;
+}
+
+@keyframes throwBall {
+    0% {
+        transform: translate(0, 0) scale(0.8) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(40px, -45px) scale(0.82) rotate(120deg);
+    }
+
+    45% {
+        transform: translate(105px, -120px) scale(0.78) rotate(260deg);
+    }
+
+    70% {
+        transform: translate(165px, -175px) scale(0.72) rotate(420deg);
+    }
+
+    100% {
+        transform: translate(220px, -205px) scale(0.62) rotate(720deg);
+    }
+}
+
+.enemy-monster.hit {
+    animation: enemyHit 0.35s ease 2;
+}
+
+@keyframes enemyHit {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-6px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
 
 /* 배틀 하단 */
 
@@ -432,7 +490,6 @@ body {
     background: #ffe066;
 }
 
-
 /* 엔딩 화면 */
 
 #endingScreen {
@@ -477,15 +534,14 @@ body {
     width: 120px;
     height: 120px;
     object-fit: contain;
+    image-rendering: pixelated;
 }
 
 .ending-dog {
     border-radius: 24px;
-    object-fit: cover !important;
 }
 </style>
 </head>
-
 
 <body>
 
@@ -498,9 +554,15 @@ body {
             숲속 생일 RPG
         </div>
 
+        <img
+            src="harueng.png"
+            class="start-monster"
+            alt="하뤵"
+        >
+
         <div class="start-text">
-            마을을 지나 숲으로 들어가면<br>
-            특별한 야생 포켓몬을 만날 수 있다.
+            하뤵과 함께 마을을 지나<br>
+            숲속으로 들어가보자.
         </div>
 
         <button class="main-button" id="startButton">
@@ -519,7 +581,9 @@ body {
                 동굴 앞까지 가면 야생 포켓몬이 나타납니다.
             </div>
 
-            <div class="player" id="player"></div>
+            <div class="player" id="player">
+                <img src="harueng.png" alt="하뤵">
+            </div>
 
         </div>
 
@@ -587,6 +651,13 @@ body {
                 </div>
             </div>
 
+            <img
+                src="ball.png"
+                id="pokeball"
+                class="pokeball"
+                alt="몬스터볼"
+            >
+
         </div>
 
         <div class="battle-bottom">
@@ -637,7 +708,6 @@ body {
 
 </div>
 
-
 <script>
 const startScreen = document.getElementById("startScreen");
 const mapScreen = document.getElementById("mapScreen");
@@ -647,6 +717,8 @@ const endingScreen = document.getElementById("endingScreen");
 const startButton = document.getElementById("startButton");
 const catchButton = document.getElementById("catchButton");
 const player = document.getElementById("player");
+const pokeball = document.getElementById("pokeball");
+const enemyMonster = document.querySelector(".enemy-monster");
 
 let x = 205;
 let y = 700;
@@ -746,9 +818,26 @@ catchButton.addEventListener("click", function() {
     catchButton.disabled = true;
     catchButton.innerText = "잡는 중...";
 
+    const battleText = document.getElementById("battleText");
+
+    battleText.innerHTML = "하뤵이 몬스터볼을 던졌다!";
+
+    pokeball.classList.remove("throw");
+    void pokeball.offsetWidth;
+    pokeball.classList.add("throw");
+
+    setTimeout(function() {
+        enemyMonster.classList.add("hit");
+        battleText.innerHTML = "나몰빼미를 잡는 중이다...";
+    }, 950);
+
+    setTimeout(function() {
+        battleText.innerHTML = "신난다! 나몰빼미를 잡았다!";
+    }, 1550);
+
     setTimeout(function() {
         showScreen(endingScreen);
-    }, 900);
+    }, 2300);
 });
 </script>
 
