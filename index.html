@@ -664,47 +664,73 @@ body {
             <button class="ctrl left" data-dir="left">◀</button>
             <button class="ctrl right" data-dir="right">▶</button>
             <button class="ctrl down" data-dir="down">▼</button>
-        </div>
+       <!-- 배틀 화면 -->
+<section id="battleScreen">
 
-        <div class="hint">
-            노트북이면<br>
-            키보드 방향키도 가능
-        </div>
+    <div class="battle-stage">
 
-    </section>
-
-
-    <!-- 배틀 화면 -->
-    <section id="battleScreen">
-
-        <div class="wild-area">
-            <div class="name-tag">
-                야생 나몰빼미
-            </div>
-            <img src="namol.png" class="wild-img" alt="나몰빼미">
-        </div>
-
-        <div class="partner-area">
-            <div class="name-tag">
-                하뤵
+        <div class="enemy-status">
+            <div class="status-name">
+                <span>나몰빼미</span>
+                <span>Lv.23</span>
             </div>
 
-            <div class="partner-img-wrap">
-                <img src="harueng.png" class="partner-img" alt="하뤵">
+            <div class="hp-bar">
+                <div class="hp-fill"></div>
             </div>
         </div>
 
-        <div class="battle-box" id="battleText">
+        <div class="enemy-platform"></div>
+
+        <img
+            src="namol.png"
+            class="enemy-monster"
+            alt="야생 나몰빼미"
+        >
+
+        <div class="player-platform"></div>
+
+        <div class="player-monster-wrap">
+            <img
+                src="harueng.png"
+                class="player-monster"
+                alt="하뤵"
+            >
+        </div>
+
+        <div class="player-status">
+            <div class="status-name">
+                <span>하뤵</span>
+                <span>Lv.30</span>
+            </div>
+
+            <div class="hp-bar">
+                <div class="hp-fill"></div>
+            </div>
+
+            <div class="hp-number">
+                91 / 91
+            </div>
+        </div>
+
+    </div>
+
+    <div class="battle-bottom">
+
+        <div class="battle-message" id="battleText">
             야생 나몰빼미가 나타났다!<br>
             하뤵은 가만히 바라보고 있다.
+        </div>
 
+        <div class="command-area">
             <button class="catch-button" id="catchButton">
                 잡는다
             </button>
         </div>
 
-    </section>
+    </div>
 
+</section>
 
     <!-- 엔딩 화면 -->
     <section id="endingScreen">
