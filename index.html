@@ -40,8 +40,7 @@ body {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    background:
-        linear-gradient(#bff3ff, #e7ffd8 45%, #fff3be);
+    background: linear-gradient(#bff3ff, #e7ffd8 45%, #fff3be);
 }
 
 .start-title {
@@ -51,22 +50,22 @@ body {
     margin-bottom: 18px;
 }
 
+.start-monster {
+    width: 145px;
+    height: 145px;
+    object-fit: contain;
+    margin: 0 auto 26px;
+    display: block;
+    image-rendering: pixelated;
+    border-radius: 24px;
+    box-shadow: 0 8px 0 rgba(0,0,0,.18);
+}
+
 .start-text {
     font-size: 18px;
     line-height: 1.7;
     margin-bottom: 28px;
     color: #444;
-}
-
-.start-monster {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    border-radius: 24px;
-    margin: 0 auto 26px;
-    display: block;
-    image-rendering: pixelated;
-    box-shadow: 0 8px 0 rgba(0,0,0,.18);
 }
 
 .main-button {
@@ -99,13 +98,11 @@ body {
 .map {
     position: absolute;
     inset: 0;
-    background-image: url("map.png");
+    background-image: url("map.png?v=20261007-4");
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
 }
-
-/* 안내문 */
 
 .top-ui {
     position: absolute;
@@ -126,8 +123,8 @@ body {
 
 .player {
     position: absolute;
-    width: 54px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
     left: 205px;
     top: 700px;
     z-index: 7;
@@ -139,7 +136,7 @@ body {
     height: 100%;
     object-fit: contain;
     image-rendering: pixelated;
-    border-radius: 12px;
+    border-radius: 10px;
     filter: drop-shadow(0 4px 0 rgba(0,0,0,.25));
 }
 
@@ -338,10 +335,10 @@ body {
 
 .player-monster-wrap {
     position: absolute;
-    left: 25px;
-    bottom: 125px;
-    width: 150px;
-    height: 150px;
+    left: 30px;
+    bottom: 130px;
+    width: 125px;
+    height: 125px;
     z-index: 3;
 }
 
@@ -376,13 +373,14 @@ body {
 
 .pokeball {
     position: absolute;
-    width: 46px;
-    height: 46px;
-    left: 115px;
-    bottom: 165px;
+    width: 48px;
+    height: 48px;
+    left: 112px;
+    bottom: 166px;
     z-index: 20;
     opacity: 0;
     pointer-events: none;
+    object-fit: contain;
     image-rendering: pixelated;
 }
 
@@ -555,7 +553,7 @@ body {
         </div>
 
         <img
-            src="harueng.png"
+            src="harueng.png?v=20261007-4"
             class="start-monster"
             alt="하뤵"
         >
@@ -582,7 +580,7 @@ body {
             </div>
 
             <div class="player" id="player">
-                <img src="harueng.png" alt="하뤵">
+                <img src="harueng.png?v=20261007-4" alt="하뤵">
             </div>
 
         </div>
@@ -621,7 +619,7 @@ body {
             <div class="enemy-platform"></div>
 
             <img
-                src="namol.png"
+                src="namol.png?v=20261007-4"
                 class="enemy-monster"
                 alt="야생 나몰빼미"
             >
@@ -630,7 +628,7 @@ body {
 
             <div class="player-monster-wrap">
                 <img
-                    src="harueng.png"
+                    src="harueng.png?v=20261007-4"
                     class="player-monster"
                     alt="하뤵"
                 >
@@ -652,7 +650,7 @@ body {
             </div>
 
             <img
-                src="ball.png"
+                src="ball.png?v=20261007-4"
                 id="pokeball"
                 class="pokeball"
                 alt="몬스터볼"
@@ -698,8 +696,8 @@ body {
             </div>
 
             <div class="ending-imgs">
-                <img src="namol.png" alt="나몰빼미">
-                <img src="harueng.png" class="ending-dog" alt="하뤵">
+                <img src="namol.png?v=20261007-4" alt="나몰빼미">
+                <img src="harueng.png?v=20261007-4" class="ending-dog" alt="하뤵">
             </div>
 
         </div>
@@ -823,7 +821,10 @@ catchButton.addEventListener("click", function() {
     battleText.innerHTML = "하뤵이 몬스터볼을 던졌다!";
 
     pokeball.classList.remove("throw");
+    enemyMonster.classList.remove("hit");
+
     void pokeball.offsetWidth;
+
     pokeball.classList.add("throw");
 
     setTimeout(function() {
