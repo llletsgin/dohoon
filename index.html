@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>도뤵아 생일축하해</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+}
+
+.phone {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background: #dff7c8;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* 시작 화면 */
+
+#startScreen {
+    min-height: 100vh;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(#bff3ff, #e7ffd8 45%, #fff3be);
+}
+
+.start-title {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+.start-text {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.main-button {
+    border: 0;
+    border-radius: 18px;
+    background: #2f9e44;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 17px 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #1f6f30;
+}
+
+.main-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #1f6f30;
+}
+
+
+/* 맵 화면 */
+
+#mapScreen {
+    display: none;
+    min-height: 100vh;
+    background: #8de083;
+    position: relative;
+}
+
+.top-ui {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    z-index: 5;
+    background: rgba(255,255,255,.88);
+    border: 3px solid #333;
+    border-radius: 14px;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+
+/* RPG 맵 */
+
+.map {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background:
+        linear-gradient(to bottom,
+            #246b35 0%,
+            #246b35 30%,
+            #80d86e 30%,
+            #80d86e 100%
+        );
+}
+
+/* 나무 */
+.tree {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    background: #1f8a3b;
+    border: 3px solid #14652b;
+    border-radius: 50% 50% 42% 42%;
+    box-shadow: inset 0 6px 0 rgba(255,255,255,.2);
+}
+
+.tree::after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 18px;
+    background: #8b5a2b;
+    left: 50%;
+    bottom: -13px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* 길 */
+.path {
+    position: absolute;
+    background: #e7c978;
+    border: 3px solid #caa95f;
+}
+
+/* 집 */
+.house {
+    position: absolute;
+    width: 78px;
+    height: 58px;
+    background: #f4e0ba;
+    border: 3px solid #6b4a2a;
+    border-radius: 4px;
+}
+
+.house::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: -31px;
+    width: 92px;
+    height: 38px;
+    background: #d9572f;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    border: 3px solid #7c3322;
+}
+
+.house::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 28px;
+    background: #6b4a2a;
+    left: 29px;
+    bottom: 0;
+}
+
+/* 센터 */
+.center {
+    position: absolute;
+    width: 95px;
+    height: 70px;
+    background: #fff;
+    border: 3px solid #333;
+    border-radius: 8px;
+}
+
+.center::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: -22px;
+    width: 105px;
+    height: 30px;
+    background: #e53935;
+    border: 3px solid #333;
+    border-radius: 18px 18px 4px 4px;
+}
+
+.center::after {
+    content: "센터";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 24px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 15px;
+    color: #333;
+}
+
+/* 동굴 */
+.cave {
+    position: absolute;
+    width: 70px;
+    height: 40px;
+    background: #4b3d31;
+    border-radius: 50% 50% 0 0;
+    border: 4px solid #2f251d;
+}
+
+/* 플레이어 */
+.player {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #ffd166;
+    border: 3px solid #333;
+    z-index: 4;
+    left: 195px;
+    top: 610px;
+    transition: left .18s linear, top .18s linear;
+}
+
+.player::before {
+    content: "윤";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.player.walk {
+    animation: walk .25s alternate infinite;
+}
+
+@keyframes walk {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+/* 컨트롤 */
+.controls {
+    position: absolute;
+    bottom: 24px;
+    left: 18px;
+    z-index: 6;
+    display: grid;
+    grid-template-columns: 56px 56px 56px;
+    grid-template-rows: 56px 56px 56px;
+    gap: 6px;
+}
+
+.ctrl {
+    border: 3px solid #333;
+    background: rgba(255,255,255,.9);
+    border-radius: 14px;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.ctrl:active {
+    background: #ffe066;
+}
+
+.up {
+    grid-column: 2;
+}
+
+.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.hint {
+    position: absolute;
+    right: 18px;
+    bottom: 42px;
+    z-index: 6;
+    width: 150px;
+    background: rgba(255,255,255,.9);
+    border: 3px solid #333;
+    border-radius: 16px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+
+/* 배틀 화면 */
+
+#battleScreen {
+    display: none;
+    min-height: 100vh;
+    background:
+        linear-gradient(#9be7ff 0%, #e7fff2 43%, #79d66b 44%, #79d66b 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+}
+
+.battle-box {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 22px;
+    background: white;
+    border: 4px solid #333;
+    border-radius: 18px;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.55;
+}
+
+.wild-area {
+    position: absolute;
+    top: 80px;
+    right: 18px;
+    width: 190px;
+    text-align: center;
+}
+
+.partner-area {
+    position: absolute;
+    bottom: 205px;
+    left: 18px;
+    width: 190px;
+    text-align: center;
+}
+
+.name-tag {
+    display: inline-block;
+    background: white;
+    border: 3px solid #333;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.wild-img {
+    width: 155px;
+    height: 155px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
+}
+
+.partner-img-wrap {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4px solid #333;
+    background: #fff;
+}
+
+.partner-img {
+    width: 240px;
+    height: 160px;
+    object-fit: cover;
+    object-position: 85% center;
+    transform: translateX(-82px);
+}
+
+.catch-button {
+    width: 100%;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 14px;
+    background: #e03131;
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 14px;
+    box-shadow: 0 5px 0 #9f1f1f;
+}
+
+.catch-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #9f1f1f;
+}
+
+
+/* 마지막 화면 */
+
+#endingScreen {
+    display: none;
+    min-height: 100vh;
+    padding: 38px 24px;
+    text-align: center;
+    background:
+        radial-gradient(circle at top, #fff1a8, #ffc9de 45%, #bde0fe);
+}
+
+.ending-card {
+    background: rgba(255,255,255,.9);
+    border: 4px solid #333;
+    border-radius: 28px;
+    padding: 28px 18px;
+    margin-top: 30px;
+}
+
+.ending-title {
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin: 16px 0;
+}
+
+.ending-sub {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.6;
+}
+
+.ending-imgs {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.ending-imgs img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.ending-dog {
+    border-radius: 24px;
+    object-fit: cover !important;
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="phone">
+
+    <!-- 시작 화면 -->
+    <section id="startScreen">
+        <div class="start-title">
+            도뤵이의<br>
+            숲속 생일 RPG
+        </div>
+
+        <div class="start-text">
+            마을을 지나 숲으로 들어가면<br>
+            특별한 야생 포켓몬을 만날 수 있다.
+        </div>
+
+        <button class="main-button" id="startButton">
+            게임 시작
+        </button>
+    </section>
+
+
+    <!-- 맵 화면 -->
+    <section id="mapScreen">
+
+        <div class="map" id="map">
+
+            <div class="top-ui">
+                방향키를 눌러 숲으로 올라가세요.<br>
+                숲속 깊이 들어가면 무언가 나타납니다.
+            </div>
+
+            <!-- 길 -->
+            <div class="path" style="left:196px; top:300px; width:38px; height:430px;"></div>
+            <div class="path" style="left:60px; top:525px; width:310px; height:38px;"></div>
+            <div class="path" style="left:196px; top:120px; width:38px; height:190px;"></div>
+            <div class="path" style="left:135px; top:300px; width:160px; height:38px;"></div>
+
+            <!-- 건물 -->
+            <div class="center" style="left:38px; top:455px;"></div>
+            <div class="house" style="left:285px; top:462px;"></div>
+            <div class="house" style="left:58px; top:625px;"></div>
+            <div class="house" style="left:270px; top:640px;"></div>
+
+            <!-- 숲 입구 -->
+            <div class="cave" style="left:180px; top:68px;"></div>
+
+            <!-- 나무들 -->
+            <div class="tree" style="left:10px; top:55px;"></div>
+            <div class="tree" style="left:56px; top:55px;"></div>
+            <div class="tree" style="left:102px; top:55px;"></div>
+            <div class="tree" style="left:250px; top:55px;"></div>
+            <div class="tree" style="left:296px; top:55px;"></div>
+            <div class="tree" style="left:342px; top:55px;"></div>
+
+            <div class="tree" style="left:12px; top:115px;"></div>
+            <div class="tree" style="left:60px; top:130px;"></div>
+            <div class="tree" style="left:310px; top:125px;"></div>
+            <div class="tree" style="left:356px; top:120px;"></div>
+
+            <div class="tree" style="left:18px; top:220px;"></div>
+            <div class="tree" style="left:70px; top:245px;"></div>
+            <div class="tree" style="left:315px; top:225px;"></div>
+            <div class="tree" style="left:360px; top:250px;"></div>
+
+            <div class="tree" style="left:18px; top:350px;"></div>
+            <div class="tree" style="left:345px; top:350px;"></div>
+
+            <div class="tree" style="left:18px; top:740px;"></div>
+            <div class="tree" style="left:65px; top:740px;"></div>
+            <div class="tree" style="left:112px; top:740px;"></div>
+            <div class="tree" style="left:250px; top:740px;"></div>
+            <div class="tree" style="left:297px; top:740px;"></div>
+            <div class="tree" style="left:344px; top:740px;"></div>
+
+            <div class="player" id="player"></div>
+
+        </div>
+
+        <div class="controls">
+            <button class="ctrl up" data-dir="up">▲</button>
+            <button class="ctrl left" data-dir="left">◀</button>
+            <button class="ctrl right" data-dir="right">▶</button>
+            <button class="ctrl down" data-dir="down">▼</button>
+        </div>
+
+        <div class="hint">
+            노트북이면<br>
+            키보드 방향키도 가능
+        </div>
+
+    </section>
+
+
+    <!-- 배틀 화면 -->
+    <section id="battleScreen">
+
+        <div class="wild-area">
+            <div class="name-tag">
+                야생 나몰빼미
+            </div>
+            <img src="namol.png" class="wild-img" alt="나몰빼미">
+        </div>
+
+        <div class="partner-area">
+            <div class="name-tag">
+                하뤵
+            </div>
+
+            <div class="partner-img-wrap">
+                <img src="harueng.png" class="partner-img" alt="하뤵">
+            </div>
+        </div>
+
+        <div class="battle-box" id="battleText">
+            야생 나몰빼미가 나타났다!<br>
+            하뤵은 가만히 바라보고 있다.
+
+            <button class="catch-button" id="catchButton">
+                잡는다
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- 엔딩 화면 -->
+    <section id="endingScreen">
+
+        <div class="ending-card">
+
+            <div style="font-size:64px;">
+                🎉
+            </div>
+
+            <div class="ending-title">
+                도뤵아<br>
+                생일축하해
+            </div>
+
+            <div class="ending-sub">
+                야생 나몰빼미를 잡았다!<br>
+                하뤵과 함께 생일 퀘스트 완료.
+            </div>
+
+            <div class="ending-imgs">
+                <img src="namol.png" alt="나몰빼미">
+                <img src="harueng.png" class="ending-dog" alt="하뤵">
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+const startScreen = document.getElementById("startScreen");
+const mapScreen = document.getElementById("mapScreen");
+const battleScreen = document.getElementById("battleScreen");
+const endingScreen = document.getElementById("endingScreen");
+
+const startButton = document.getElementById("startButton");
+const catchButton = document.getElementById("catchButton");
+const player = document.getElementById("player");
+
+let x = 195;
+let y = 610;
+let encountered = false;
+
+function showScreen(screen) {
+    startScreen.style.display = "none";
+    mapScreen.style.display = "none";
+    battleScreen.style.display = "none";
+    endingScreen.style.display = "none";
+
+    screen.style.display = "block";
+}
+
+function updatePlayer() {
+    player.style.left = x + "px";
+    player.style.top = y + "px";
+
+    player.classList.add("walk");
+
+    setTimeout(function() {
+        player.classList.remove("walk");
+    }, 220);
+
+    checkEncounter();
+}
+
+function movePlayer(dir) {
+    const step = 28;
+
+    if (dir === "up") {
+        y -= step;
+    }
+
+    if (dir === "down") {
+        y += step;
+    }
+
+    if (dir === "left") {
+        x -= step;
+    }
+
+    if (dir === "right") {
+        x += step;
+    }
+
+    if (x < 18) x = 18;
+    if (x > 370) x = 370;
+    if (y < 85) y = 85;
+    if (y > 720) y = 720;
+
+    updatePlayer();
+}
+
+function checkEncounter() {
+    if (encountered) return;
+
+    if (y <= 230) {
+        encountered = true;
+
+        setTimeout(function() {
+            showScreen(battleScreen);
+        }, 450);
+    }
+}
+
+startButton.addEventListener("click", function() {
+    showScreen(mapScreen);
+    updatePlayer();
+});
+
+document.querySelectorAll(".ctrl").forEach(function(button) {
+    button.addEventListener("click", function() {
+        movePlayer(button.dataset.dir);
+    });
+});
+
+document.addEventListener("keydown", function(e) {
+    if (mapScreen.style.display !== "block") return;
+
+    if (e.key === "ArrowUp") movePlayer("up");
+    if (e.key === "ArrowDown") movePlayer("down");
+    if (e.key === "ArrowLeft") movePlayer("left");
+    if (e.key === "ArrowRight") movePlayer("right");
+});
+
+catchButton.addEventListener("click", function() {
+    catchButton.disabled = true;
+    catchButton.innerText = "잡는 중...";
+
+    setTimeout(function() {
+        showScreen(endingScreen);
+    }, 900);
+});
+</script>
+
+</body>
+</html>
